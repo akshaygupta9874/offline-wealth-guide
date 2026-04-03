@@ -15,11 +15,7 @@ const Index = () => {
   const mockData = getMockStatement();
 
   if (view === "upload") {
-    return (
-      <UploadFlow
-        onComplete={() => setView("dashboard")}
-      />
-    );
+    return <UploadFlow onComplete={() => setView("dashboard")} />;
   }
 
   if (view === "dashboard") {
@@ -35,9 +31,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <div onClick={() => setView("upload")}>
-        <HeroSection />
-      </div>
+      <HeroSection
+        onUpload={() => setView("upload")}
+        onDemo={() => setView("dashboard")}
+      />
       <FeaturesSection />
       <ComparisonSection />
       <TrustSection />
