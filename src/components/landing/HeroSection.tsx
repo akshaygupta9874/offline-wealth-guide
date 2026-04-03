@@ -2,7 +2,12 @@ import { Shield, Upload, Wifi, WifiOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-abstract.jpg";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onUpload?: () => void;
+  onDemo?: () => void;
+}
+
+const HeroSection = ({ onUpload, onDemo }: HeroSectionProps) => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
       {/* Background image with overlay */}
