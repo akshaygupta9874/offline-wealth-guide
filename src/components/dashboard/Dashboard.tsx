@@ -57,7 +57,14 @@ const Dashboard = ({ transactions, bankName, period, onBack }: DashboardProps) =
           <DailySpendChart transactions={transactions} />
         </div>
 
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <HealthScoreCard transactions={transactions} />
+          <AnomalyCards transactions={transactions} />
+        </div>
+
         <BalanceChart transactions={transactions} />
+
+        <RoastMode transactions={transactions} />
 
         <div>
           <h2 className="font-display font-semibold text-sm mb-3">Transactions</h2>
