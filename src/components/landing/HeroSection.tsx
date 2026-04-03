@@ -2,7 +2,12 @@ import { Shield, Upload, Wifi, WifiOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-abstract.jpg";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onUpload?: () => void;
+  onDemo?: () => void;
+}
+
+const HeroSection = ({ onUpload, onDemo }: HeroSectionProps) => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
       {/* Background image with overlay */}
@@ -37,11 +42,11 @@ const HeroSection = () => {
 
         {/* CTA buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12 animate-fade-in-up animation-delay-300">
-          <Button variant="hero" size="lg" className="w-full sm:w-auto text-base px-8 py-6">
+          <Button variant="hero" size="lg" className="w-full sm:w-auto text-base px-8 py-6" onClick={onUpload}>
             <Upload className="w-4 h-4 mr-2" />
             Upload Statement
           </Button>
-          <Button variant="hero-outline" size="lg" className="w-full sm:w-auto text-base px-8 py-6">
+          <Button variant="hero-outline" size="lg" className="w-full sm:w-auto text-base px-8 py-6" onClick={onDemo}>
             See Demo
           </Button>
         </div>
