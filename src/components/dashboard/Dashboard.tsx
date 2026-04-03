@@ -5,6 +5,9 @@ import CategoryDonut from "./CategoryDonut";
 import DailySpendChart from "./DailySpendChart";
 import BalanceChart from "./BalanceChart";
 import TransactionTable from "./TransactionTable";
+import HealthScoreCard from "./HealthScoreCard";
+import AnomalyCards from "./AnomalyCards";
+import RoastMode from "./RoastMode";
 
 interface DashboardProps {
   transactions: Transaction[];
