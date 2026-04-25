@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BANKS, type BankId } from "@/lib/types";
 import { probePdf } from "@/lib/pdf";
+import { parseStatement, type ParseResult } from "@/lib/parser";
 
 interface UploadFlowProps {
-  onComplete: () => void;
+  /** Called with parsed result when user uploads a real PDF. */
+  onComplete: (result: ParseResult | null) => void;
 }
 
 type Step = "upload" | "password" | "ready";
@@ -87,11 +89,26 @@ const UploadFlow = ({ onComplete }: UploadFlowProps) => {
 
   const handleAnalyze = () => {
     setProcessing(true);
-    // Simulate parsing — in production this would feed pdf.js text into a parser
-    setTimeout(() => {
+    if (!file) {
       setProcessing(false);
-      onComplete();
-    }, 1200);
+      onComplete(null);
+      return;
+    }
+    parseStatement(file, password || undefined)
+      .then((result) => {
+        setProcessing(false);
+        if (result.transactions.length === 0) {
+          setError(
+            "Couldn't extract any transactions. The format may not be supported yet — try the demo data instead.",
+          );
+          return;
+        }
+        onComplete(result);
+      })
+      .catch(() => {
+        setProcessing(false);
+        setError("Failed to parse the statement. The PDF may be scanned or in an unsupported format.");
+      });
   };
 
   /* ─── Step: upload ─── */
