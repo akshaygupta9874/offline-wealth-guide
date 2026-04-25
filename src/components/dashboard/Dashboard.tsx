@@ -8,6 +8,9 @@ import TransactionTable from "./TransactionTable";
 import HealthScoreCard from "./HealthScoreCard";
 import AnomalyCards from "./AnomalyCards";
 import RoastMode from "./RoastMode";
+import SubscriptionTracker from "./SubscriptionTracker";
+import CalendarHeatmap from "./CalendarHeatmap";
+import SpendingWrapped from "./SpendingWrapped";
 
 interface DashboardProps {
   transactions: Transaction[];
@@ -52,6 +55,8 @@ const Dashboard = ({ transactions, bankName, period, onBack }: DashboardProps) =
       <main className="max-w-5xl mx-auto px-4 py-6 space-y-4">
         <SummaryCards transactions={transactions} />
 
+        <SpendingWrapped transactions={transactions} />
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <CategoryDonut transactions={transactions} />
           <DailySpendChart transactions={transactions} />
@@ -61,6 +66,10 @@ const Dashboard = ({ transactions, bankName, period, onBack }: DashboardProps) =
           <HealthScoreCard transactions={transactions} />
           <AnomalyCards transactions={transactions} />
         </div>
+
+        <CalendarHeatmap transactions={transactions} />
+
+        <SubscriptionTracker transactions={transactions} />
 
         <BalanceChart transactions={transactions} />
 
