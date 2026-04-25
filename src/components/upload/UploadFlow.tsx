@@ -165,7 +165,7 @@ const UploadFlow = ({ onComplete }: UploadFlowProps) => {
           )}
 
           <div className="mt-6 text-center">
-            <Button variant="hero-outline" onClick={onComplete} className="text-sm">
+            <Button variant="hero-outline" onClick={() => onComplete(null)} className="text-sm">
               Try with demo data instead
             </Button>
           </div>
